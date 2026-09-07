@@ -99,7 +99,7 @@ export function Daw({
 
   return (
     <div className="flex h-screen w-full flex-col p-4">
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto pr-3">
         <Tabs tabs={[overview, ...editorTabs]} onClose={closeEditor} />
       </div>
 

@@ -25,7 +25,7 @@ export function Sequencer({ id }: { id: string }) {
           className="flex items-center gap-1"
           key={labels[noteIndex] ?? noteIndex}
         >
-          <span className="note-name w-10 shrink-0 text-sm">
+          <span className="note-name w-16 shrink-0 text-xs">
             {label(labels[noteIndex] ?? '')}
           </span>
           {row.map((on, stepIndex) => {
