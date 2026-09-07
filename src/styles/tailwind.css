@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+/* Design tokens carried over from the current UI. Extend as components are
+   ported from Bootstrap to Tailwind (see REBUILD_PLAN.md, Phase 3). */
+@theme {
+  --color-brand: #74c0fc;
+}
