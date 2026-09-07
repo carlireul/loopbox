@@ -1,0 +1,134 @@
+/*
+ * Component styles ported from the legacy App.css, keeping the exact sequencer,
+ * tab, and control appearance the UI is known for. Bootstrap's grid/utility
+ * classes are replaced by Tailwind in the markup; these are the bespoke bits
+ * Tailwind utilities don't cover.
+ */
+
+:root {
+  --brand: #74c0fc;
+  --brand-soft: #74c1fc7b;
+  --accent: #fcb874;
+  --accent-strong: #ef9134;
+}
+
+body {
+  background: #f8f9fa;
+  color: #212529;
+}
+
+/* --- buttons --------------------------------------------------------------- */
+
+.track-button {
+  padding: 4px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.track-button:hover {
+  background: var(--brand);
+}
+
+.btn-brand,
+.btn-muted {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.btn-brand {
+  background: var(--brand);
+  color: #08233b;
+}
+.btn-muted {
+  background: #e9ecef;
+  color: #212529;
+}
+.btn-brand:hover,
+.btn-muted:hover {
+  filter: brightness(95%);
+}
+
+/* --- range + select -------------------------------------------------------- */
+
+input[type='range'] {
+  accent-color: var(--brand);
+  max-width: 10rem;
+}
+
+select.control {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* --- sequencer ------------------------------------------------------------- */
+
+.sequencer-button {
+  background: var(--brand-soft);
+  padding: 20px;
+  margin: 2px;
+  border: transparent;
+  width: 80%;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.timeline-button {
+  background: var(--brand-soft);
+  border: transparent;
+  height: 100%;
+  width: 100%;
+}
+.sequencer-playing {
+  filter: brightness(75%);
+}
+.sequencer-beat {
+  background: var(--brand);
+}
+.sequencer-active {
+  background: var(--accent);
+}
+.sequencer-beat.sequencer-active {
+  background: var(--accent-strong);
+}
+.note-name {
+  font-weight: bold;
+  color: var(--accent);
+  text-align: center;
+}
+
+.track-timeline-synth {
+  height: 90px;
+  width: 100%;
+  display: flex;
+}
+
+/* --- tabs (ported from the react-tabs styling) ----------------------------- */
+
+.tabs__list {
+  border-bottom: 2px solid var(--brand);
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.tabs__tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  padding: 6px 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tabs__tab--selected {
+  background: var(--brand);
+  color: black;
+}

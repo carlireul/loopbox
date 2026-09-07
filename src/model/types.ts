@@ -55,8 +55,8 @@ export interface Filter {
   wet: number;
   cutoff: number;
   type: FilterType;
-  /** AutoFilter LFO rate. */
-  rate: number;
+  /** AutoFilter LFO rate — 0 (off) or a Tone time value like "8n". */
+  rate: number | string;
   rolloff: Rolloff;
 }
 
