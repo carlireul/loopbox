@@ -11,10 +11,15 @@ export function useEngineSync() {
   const tracks = useProjectStore((s) => s.tracks);
   const bpm = useProjectStore((s) => s.project?.bpm);
   const vol = useProjectStore((s) => s.project?.vol);
+  const loopEnd = useProjectStore((s) => s.project?.trackEnd);
 
   useEffect(() => {
     audioEngine.setTracks(tracks);
   }, [tracks]);
+
+  useEffect(() => {
+    if (loopEnd != null) audioEngine.setLoopEnd(loopEnd);
+  }, [loopEnd]);
 
   // Tear the engine down when the DAW unmounts (project closed/deleted). The
   // `tracks` effect above can't do this: it won't re-run during unmount, so a

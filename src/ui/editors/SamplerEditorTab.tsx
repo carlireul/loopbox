@@ -3,6 +3,7 @@ import type { Subdivision } from '../../model/types';
 import { TrackControls } from '../tracks/TrackControls';
 import { Sequencer } from './Sequencer';
 import { EffectEditor } from './EffectEditor';
+import { DrumTutorial } from '../tutorials/DrumTutorial';
 
 const SUBDIVISIONS: Subdivision[] = [4, 8, 16];
 
@@ -31,6 +32,10 @@ export function SamplerEditorTab({ id }: { id: string }) {
             ))}
           </select>
         </TrackControls>
+        <div className="flex items-center gap-2 pt-3">
+          <span className="font-medium">Sequencer</span>
+          <DrumTutorial />
+        </div>
         <div className="pt-3">
           <Sequencer id={id} />
         </div>

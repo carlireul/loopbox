@@ -1,5 +1,7 @@
 import { useProjectStore } from '../../store/projectStore';
 import type { FilterType, Rolloff, Track } from '../../model/types';
+import { FilterTutorial } from '../tutorials/FilterTutorial';
+import { EffectTutorial } from '../tutorials/EffectTutorial';
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -86,6 +88,7 @@ export function EffectEditor({ id }: { id: string }) {
             >
               {filter.wet === 1 ? 'Disable' : 'Enable'} Filter
             </button>
+            <FilterTutorial id={id} />
           </div>
           <Slider
             label="Cutoff"
@@ -153,7 +156,10 @@ export function EffectEditor({ id }: { id: string }) {
 
       <section className="flex flex-col gap-2 border-b border-gray-300 pb-3">
         <div className="flex items-center justify-between">
-          <h4 className="font-semibold">EQ</h4>
+          <div className="flex items-center gap-2">
+            <h4 className="font-semibold">EQ</h4>
+            <EffectTutorial />
+          </div>
           <button
             className="btn-muted"
             onClick={() => updateEffectOptions(id, 'eq', DEFAULT_EQ)}

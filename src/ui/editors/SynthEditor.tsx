@@ -1,6 +1,8 @@
 import { useProjectStore, type SynthTrack } from '../../store/projectStore';
 import type { Envelope, OscillatorType } from '../../model/types';
 import { Renamable } from '../common/Renamable';
+import { WaveTutorial } from '../tutorials/WaveTutorial';
+import { ADSRTutorial } from '../tutorials/ADSRTutorial';
 
 const WAVES: OscillatorType[] = ['sine', 'square', 'sawtooth', 'triangle'];
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -41,7 +43,13 @@ export function SynthEditor({ track }: { track: SynthTrack }) {
             </option>
           ))}
         </select>
+        <WaveTutorial />
       </label>
+
+      <div className="flex items-center gap-2">
+        <span className="font-medium">Envelope</span>
+        <ADSRTutorial id={id} />
+      </div>
 
       {ENV_ROWS.map(({ key, label, min, max }) => (
         <div className="flex items-center gap-2" key={key}>

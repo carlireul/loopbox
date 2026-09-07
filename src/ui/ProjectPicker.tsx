@@ -3,13 +3,23 @@ import {
   deleteProject,
   useProjectList,
 } from '../data/projects';
+import { audioEngine } from '../audio/AudioEngine';
 
 /** Landing screen: open an existing project or create a new one. */
 export function ProjectPicker({ onOpen }: { onOpen: (id: string) => void }) {
   const projects = useProjectList();
   if (!projects) return null;
 
+  // Opening a project is a user gesture, so resume the AudioContext here. This
+  // is the one place the browser's autoplay policy lets us unlock audio without
+  // a dedicated "Start" button inside the DAW.
+  const open = (id: string) => {
+    void audioEngine.start();
+    onOpen(id);
+  };
+
   const create = async () => {
+    void audioEngine.start();
     const id = await createNewProject(
       `Untitled Project ${projects.length + 1}`,
     );
@@ -27,7 +37,7 @@ export function ProjectPicker({ onOpen }: { onOpen: (id: string) => void }) {
           >
             <button
               className="font-semibold text-sky-700 hover:underline"
-              onClick={() => onOpen(project.id)}
+              onClick={() => open(project.id)}
             >
               {project.name}
             </button>

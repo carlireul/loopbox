@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useProjectStore } from '../store/projectStore';
-import { audioEngine } from '../audio/AudioEngine';
 import { useEngineSync } from '../audio/useEngine';
 import { deleteProject } from '../data/projects';
 import { Tabs, type TabDef } from './common/Tabs';
@@ -33,7 +32,6 @@ export function Daw({
   const addSampler = useProjectStore((s) => s.addSampler);
   const addAudio = useProjectStore((s) => s.addAudio);
 
-  const [started, setStarted] = useState(false);
   const [openTabs, setOpenTabs] = useState<string[]>([]);
 
   useEffect(() => {
@@ -53,22 +51,6 @@ export function Daw({
 
   if (status !== 'ready' || !project) {
     return <div className="p-6 text-gray-500">Loading…</div>;
-  }
-
-  if (!started) {
-    return (
-      <div className="p-6">
-        <button
-          className="btn-brand text-lg"
-          onClick={async () => {
-            await audioEngine.start(project.trackEnd);
-            setStarted(true);
-          }}
-        >
-          <i className="fa-solid fa-music" /> Start
-        </button>
-      </div>
-    );
   }
 
   const overview: TabDef = {
