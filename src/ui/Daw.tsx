@@ -9,8 +9,10 @@ import { GlobalControls } from './GlobalControls';
 import { TrackRow } from './tracks/TrackRow';
 import { SynthEditorTab } from './editors/SynthEditorTab';
 import { SamplerEditorTab } from './editors/SamplerEditorTab';
+import { AudioEditorTab } from './editors/AudioEditorTab';
 
 const DRUM_PACKS = ['808', 'acoustic', 'analog', 'electro', 'random'];
+const MAX_AUDIO_BYTES = 8_500_000;
 
 export function Daw({
   projectId,
@@ -29,6 +31,7 @@ export function Daw({
   const setProjectName = useProjectStore((s) => s.setProjectName);
   const addSynth = useProjectStore((s) => s.addSynth);
   const addSampler = useProjectStore((s) => s.addSampler);
+  const addAudio = useProjectStore((s) => s.addAudio);
 
   const [started, setStarted] = useState(false);
   const [openTabs, setOpenTabs] = useState<string[]>([]);
@@ -91,6 +94,8 @@ export function Daw({
         content:
           track.type === 'sampler' ? (
             <SamplerEditorTab id={id} />
+          ) : track.type === 'audio' ? (
+            <AudioEditorTab id={id} />
           ) : (
             <SynthEditorTab id={id} />
           ),
@@ -121,6 +126,25 @@ export function Daw({
                   : `${pack[0].toUpperCase()}${pack.slice(1)}`}
               </button>
             ))}
+            <label className="btn-muted cursor-pointer">
+              Add Audio
+              <input
+                type="file"
+                accept="audio/*"
+                className="hidden"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  e.target.value = '';
+                  if (!file) return;
+                  if (file.size > MAX_AUDIO_BYTES) {
+                    alert('Audio file must be 8 MB or smaller.');
+                    return;
+                  }
+                  const id = await addAudio(file);
+                  openEditor(id);
+                }}
+              />
+            </label>
           </div>
         </div>
 

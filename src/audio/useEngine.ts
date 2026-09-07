@@ -16,6 +16,11 @@ export function useEngineSync() {
     audioEngine.setTracks(tracks);
   }, [tracks]);
 
+  // Tear the engine down when the DAW unmounts (project closed/deleted). The
+  // `tracks` effect above can't do this: it won't re-run during unmount, so a
+  // final empty `setTracks({})` never fires and the transport keeps playing.
+  useEffect(() => () => audioEngine.dispose(), []);
+
   useEffect(() => {
     if (bpm != null) audioEngine.setBpm(bpm);
   }, [bpm]);

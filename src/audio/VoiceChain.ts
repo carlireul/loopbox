@@ -53,9 +53,11 @@ export class VoiceChain {
 
   applyControls(controls: Controls) {
     this.channel.solo = controls.solod;
-    this.channel.mute = controls.muted;
     this.channel.volume.value = controls.vol;
     this.channel.pan.value = controls.pan;
+    // Must come last: Tone implements mute as `volume.value = -Infinity`, so
+    // writing volume after mute would silently un-mute the channel.
+    this.channel.mute = controls.muted;
   }
 
   applyFilter(filter: Filter) {

@@ -11,7 +11,16 @@ interface FakeVoice {
 // The voice layer touches Tone.js (and thus an AudioContext), which jsdom does
 // not provide. Mock it so we can unit-test the engine's reconciliation and
 // subscription bookkeeping in isolation.
-const { registry } = vi.hoisted(() => ({ registry: [] as FakeVoice[] }));
+const { registry, transport } = vi.hoisted(() => ({
+  registry: [] as FakeVoice[],
+  transport: { stop: vi.fn(), clear: vi.fn(), position: '0:0:0' },
+}));
+
+// jsdom has no AudioContext, so Tone's real transport is unusable. Stub the
+// pieces the engine's lifecycle touches.
+vi.mock('tone', () => ({
+  getTransport: () => transport,
+}));
 
 vi.mock('./voices', () => ({
   createVoice: (track: { id: string }) => {
@@ -38,6 +47,7 @@ let engine: AudioEngine;
 
 beforeEach(() => {
   registry.length = 0;
+  transport.stop.mockClear();
   engine = new AudioEngine();
 });
 
@@ -88,5 +98,6 @@ describe('dispose', () => {
     expect(a.dispose).toHaveBeenCalledOnce();
     expect(b.dispose).toHaveBeenCalledOnce();
     expect(engine.getLevel('a')).toBe(0);
+    expect(transport.stop).toHaveBeenCalledOnce();
   });
 });

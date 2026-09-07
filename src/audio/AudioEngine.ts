@@ -164,10 +164,13 @@ export class AudioEngine {
   // --- teardown --------------------------------------------------------------
 
   dispose() {
+    const transport = Tone.getTransport();
     if (this.clockId !== null) {
-      Tone.getTransport().clear(this.clockId);
+      transport.clear(this.clockId);
       this.clockId = null;
     }
+    transport.stop();
+    transport.position = '0:0:0';
     for (const voice of this.voices.values()) voice.dispose();
     this.voices.clear();
     this.drawListeners.clear();

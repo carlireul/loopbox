@@ -107,6 +107,11 @@ select.control {
   display: flex;
 }
 
+.track-timeline-audio {
+  width: 100%;
+  overflow: hidden;
+}
+
 /* --- tabs (ported from the react-tabs styling) ----------------------------- */
 
 .tabs__list {
