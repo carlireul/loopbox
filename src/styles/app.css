@@ -70,10 +70,11 @@ select.control {
 
 .sequencer-button {
   background: var(--brand-soft);
-  padding: 20px;
-  margin: 2px;
+  /* Height is fixed; width is driven by the sequencer grid so pads stretch to
+   * fill on wide screens and hold a minimum tap size (scrolling) on narrow ones. */
+  height: 2.25rem;
+  width: 100%;
   border: transparent;
-  width: 80%;
   border-radius: 3px;
   cursor: pointer;
 }
