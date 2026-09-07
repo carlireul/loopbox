@@ -51,7 +51,8 @@ against it.
 - Install & configure **Tailwind**; establish the design tokens (colors incl. `#74C0FC`, spacing,
   fonts) that match the current look.
 - **GitHub Actions:** typecheck + lint + test + build on every PR. Vercel for deploy
-  (PR previews + prod on `main`).
+  (PR previews + prod on `main`). Runs on GitHub-hosted runners for now; **migrate to a
+  self-hosted runner** at some point (tracked as a TODO in `ci.yml`).
 
 ### Phase 1 — Model & persistence (the core fix)
 

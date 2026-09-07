@@ -12,6 +12,8 @@ concurrency:
 jobs:
   verify:
     name: Typecheck, lint, test, build
+    # TODO: migrate to a self-hosted runner (runs-on: self-hosted) once we have
+    # one provisioned. GitHub-hosted is fine for now (see REBUILD_PLAN.md).
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
