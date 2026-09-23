@@ -85,8 +85,8 @@ export function Daw({
     });
 
   return (
-    <div className="flex h-screen w-full flex-col p-4">
-      <div className="flex-1 overflow-auto pr-3">
+    <div className="flex h-[100dvh] w-full flex-col p-2 sm:p-4">
+      <div className="flex-1 overflow-auto pr-1 sm:pr-3">
         <Tabs tabs={[overview, ...editorTabs]} onClose={closeEditor} />
       </div>
 
@@ -130,7 +130,7 @@ export function Daw({
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-2">
+        <div className="flex flex-col items-start gap-2 lg:items-end">
           <Renamable name={project.name} onChange={setProjectName} />
           <div className="flex gap-2">
             <button className="btn-brand" onClick={() => save()}>

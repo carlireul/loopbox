@@ -3,12 +3,10 @@
 A browser DAW (drum machine / synth / sampler / audio-clip sequencer) built on Tone.js.
 Educational tutorials explain synthesis concepts (waves, ADSR, filters, effects, drum patterns).
 
-## Status: strangler rebuild on branch `rebuild`
+## Strangler rebuild
 
-The app is being rewritten from a messy JS version (`main`) into a typed, tested TS one.
-See `REBUILD_PLAN.md` for the full plan and phase breakdown. Current state: Phases 0–2 done;
-Phase 3 (port the UI to Tailwind) nearly complete — synth/sampler/audio tracks and all five
-tutorials are ported. Remaining: retire the old app on `main` and sweep dead assets.
+This TS app replaces the old JS version still on `main`. `REBUILD_PLAN.md` holds the plan
+and current phase status.
 
 The old app (`main:src/components/*.jsx`) is the behavior reference when porting — diff against it.
 
@@ -24,7 +22,7 @@ npm run build         # vite build (+ PWA)
 ```
 
 CI runs typecheck + lint + format:check + test + build on every push. Run all of these before
-committing. Commit only when asked.
+committing.
 
 ## Architecture — one-way data flow
 
