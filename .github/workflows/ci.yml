@@ -17,9 +17,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
+        # No `cache: npm`: the self-hosted runner's ~/.npm already persists, and
+        # round-tripping it through the Actions cache means uploading it from home.
         with:
           node-version: 22
-          cache: npm
 
       - name: Install dependencies
         run: npm ci
