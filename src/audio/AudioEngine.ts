@@ -26,6 +26,14 @@ export class AudioEngine {
 
   /** Resume the AudioContext (must be called from a user gesture) and arm the transport. */
   async start(loopEnd = this.loopEnd): Promise<void> {
+    // iOS Safari routes Web Audio to the "ambient" session by default, which the
+    // hardware mute switch silences. Opt into "playback" so sound plays with the
+    // switch on (iOS 16.4+; a no-op elsewhere).
+    const audioSession = (
+      navigator as Navigator & { audioSession?: { type: string } }
+    ).audioSession;
+    if (audioSession) audioSession.type = 'playback';
+
     await Tone.start();
     this.loopEnd = loopEnd;
     const transport = Tone.getTransport();
