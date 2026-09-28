@@ -1,0 +1,38 @@
+name: Deploy
+
+# Builds and redeploys after CI passes on a push to main. Runs on the
+# self-hosted runner on the homeserver, so deploy talks to the local daemon.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+# Shared with the other projects' deploys: queue, never cancel.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push'
+    runs-on: self-hosted
+    env:
+      IMAGE: registry.carly.zone/loopbox
+      COMPOSE_DIR: ${{ secrets.DEPLOY_COMPOSE_DIR }}
+    # The runner user must be `docker login`'d to registry.carly.zone.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Build and push image
+        env:
+          PRIMARY_TAG: latest
+          SHA_TAG: ${{ github.event.workflow_run.head_sha }}
+        run: scripts/ci/build-push.sh
+
+      - name: Deploy
+        run: scripts/ci/deploy-compose.sh

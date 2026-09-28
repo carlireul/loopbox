@@ -72,7 +72,7 @@ export default defineConfig({
   },
   // ffmpeg.wasm audio export needs cross-origin isolation (SharedArrayBuffer).
   // Apply the same headers in dev and `preview`; production sets them in
-  // vercel.json. All external subresources are self-hosted, so require-corp
+  // nginx.conf. All external subresources are self-hosted, so require-corp
   // has nothing to block.
   server: { headers: crossOriginIsolation },
   preview: { headers: crossOriginIsolation },
