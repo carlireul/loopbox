@@ -2,7 +2,7 @@ dist
 build
 dev-dist
 node_modules
-package-lock.json
+bun.lock
 public
 
 # Legacy app — ported incrementally (see REBUILD_PLAN.md). These are formatted
