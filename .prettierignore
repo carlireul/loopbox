@@ -1,0 +1,15 @@
+dist
+build
+dev-dist
+node_modules
+package-lock.json
+public
+
+# Legacy app — ported incrementally (see REBUILD_PLAN.md). These are formatted
+# as each file is rewritten to TypeScript, to avoid a huge churn diff up front.
+src/**/*.jsx
+src/**/*.js
+src/index.css
+src/App.css
+src/PWABadge.css
+src/data/samples
