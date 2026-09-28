@@ -14,13 +14,15 @@ The old app (`main:src/components/*.jsx`) is the behavior reference when porting
 
 ## Commands
 
+Bun is the package manager + script runner; the tools run on Node (vitest's mocks break under the Bun runtime).
+
 ```
-npm run dev           # Vite dev server (localhost:5173)
-npm run typecheck     # tsc --noEmit (strict)
-npm run lint          # eslint, zero warnings allowed
-npm run format:check  # prettier
-npm run test          # vitest (jsdom); test:watch for watch mode
-npm run build         # vite build (+ PWA)
+bun run dev           # Vite dev server (localhost:5173)
+bun run typecheck     # tsc --noEmit (strict)
+bun run lint          # eslint, zero warnings allowed
+bun run format:check  # prettier
+bun run test          # vitest (jsdom); test:watch for watch mode
+bun run build         # vite build (+ PWA)
 ```
 
 CI runs typecheck + lint + format:check + test + build on every push. Run all of these before
