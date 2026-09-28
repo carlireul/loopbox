@@ -20,7 +20,7 @@ export function TrackRow({ id, onOpen }: { id: string; onOpen: () => void }) {
   const icon = ICONS[track.type];
 
   return (
-    <div className="grid grid-cols-[1.55fr_0.45fr] items-center gap-3 border-b border-gray-200 py-2">
+    <div className="grid grid-cols-1 items-center gap-3 border-b border-gray-200 py-2 sm:grid-cols-[1.55fr_0.45fr]">
       {track.type === 'audio' ? (
         <AudioWaveform blob={track.blob} />
       ) : (

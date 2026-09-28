@@ -85,22 +85,25 @@ export function Daw({
     });
 
   return (
-    <div className="flex h-screen w-full flex-col p-4">
-      <div className="flex-1 overflow-auto pr-3">
+    <div className="flex h-[100dvh] w-full flex-col p-2 sm:p-4">
+      <div className="flex-1 overflow-auto pr-1 sm:pr-3">
         <Tabs tabs={[overview, ...editorTabs]} onClose={closeEditor} />
       </div>
 
-      <div className="mt-auto grid grid-cols-1 gap-4 border-t border-gray-200 pt-3 lg:grid-cols-[2fr_1fr]">
+      <div className="mt-auto grid grid-cols-1 gap-2 border-t border-gray-200 pt-2 sm:gap-4 sm:pt-3 lg:grid-cols-[2fr_1fr]">
         <div className="flex flex-col gap-2">
           <GlobalControls />
-          <div className="flex flex-wrap items-center gap-2">
-            <button className="btn-muted" onClick={() => addSynth()}>
+          <div className="-mx-2 flex items-center gap-2 overflow-x-auto px-2 sm:mx-0 sm:flex-wrap sm:px-0">
+            <button
+              className="btn-muted shrink-0"
+              onClick={() => addSynth()}
+            >
               Add Synth
             </button>
             {DRUM_PACKS.map((pack) => (
               <button
                 key={pack}
-                className="btn-muted"
+                className="btn-muted shrink-0"
                 onClick={() => addSampler(pack)}
               >
                 {pack === 'random'
@@ -108,7 +111,7 @@ export function Daw({
                   : `${pack[0].toUpperCase()}${pack.slice(1)}`}
               </button>
             ))}
-            <label className="btn-muted cursor-pointer">
+            <label className="btn-muted shrink-0 cursor-pointer">
               Add Audio
               <input
                 type="file"
@@ -130,7 +133,7 @@ export function Daw({
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-2">
+        <div className="flex flex-col items-start gap-2 lg:items-end">
           <Renamable name={project.name} onChange={setProjectName} />
           <div className="flex gap-2">
             <button className="btn-brand" onClick={() => save()}>
