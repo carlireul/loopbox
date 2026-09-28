@@ -20,12 +20,7 @@ export default defineConfig({
       // The app registers the SW through the React hook, so don't also inject
       // the auto-register script (that would register it twice).
       injectRegister: false,
-      includeAssets: [
-        'favicon.ico',
-        'favicon-16x16.png',
-        'favicon-32x32.png',
-        'apple-touch-icon.png',
-      ],
+      includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'loopbox',
         short_name: 'loopbox',
